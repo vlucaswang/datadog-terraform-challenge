@@ -21,3 +21,4 @@ crash.log
 # Editor files
 *.swp
 .DS_Store
+dist/
