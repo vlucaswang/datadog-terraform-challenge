@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.1](https://github.com/vlucaswang/datadog-terraform-challenge/compare/v1.0.0...v1.0.1) (2026-03-20)
+
+### Bug Fixes
+
+* package only the module in releases ([8c67db8](https://github.com/vlucaswang/datadog-terraform-challenge/commit/8c67db89f06635313fb5f3742a90424f5e147634))
+
 ## 1.0.0 (2026-03-20)
 
 ### Features
