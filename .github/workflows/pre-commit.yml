@@ -1,0 +1,27 @@
+name: Pre-Commit
+
+on:
+  pull_request:
+    branches:
+      - main
+
+env:
+  TERRAFORM_DOCS_VERSION: v0.20.0
+  TFLINT_VERSION: v0.59.1
+
+jobs:
+  pre-commit:
+    name: Pre-commit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Get Terraform version
+        id: terraform_version
+        run: |
+          echo "terraform_version=$(awk '/terraform/ {print $2}' .tool-versions)" >> $GITHUB_OUTPUT
+      - name: Pre-commit Terraform
+        uses: clowdhaus/terraform-composite-actions/pre-commit@main
+        with:
+          terraform-version: ${{ steps.terraform_version.outputs.terraform_version }}
+          terraform-docs-version: ${{ env.TERRAFORM_DOCS_VERSION }}
+          tflint-version: ${{ env.TFLINT_VERSION }}
