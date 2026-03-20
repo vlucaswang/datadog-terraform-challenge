@@ -1,0 +1,25 @@
+formatter: "markdown table"
+
+output:
+  mode: replace
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    # Datadog website monitor module
+
+    ## Purpose
+    Create a reusable Datadog public website monitoring baseline with an HTTP synthetic check, latency alerting, a service dashboard, and enforced service tags.
+
+    ## Defaults
+    - Synthetic Type: API HTTP check for lightweight and reliable uptime coverage
+    - Coverage: Runs from at least two managed Datadog locations by default
+    - SSL Validation: HTTPS certificate validation remains enabled by keeping insecure TLS disabled
+    - Alerting: Separate availability and latency monitors with sane defaults
+    - Tagging: Enforces `env`, `service`, and `team` tags on every managed resource
+    - Dashboard: Provides uptime percentage, failed-run history, and latency trends for the target site
+
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+
+sort:
+  enabled: true
+  by: required

@@ -1,0 +1,23 @@
+# Compiled files.
+errored.tfstate
+*.tfstate
+*.tfstate.backup
+*.tfstate.*.backup
+*.plan.out
+plan.out
+crash.log
+
+# Secret files.
+*.auto.tfvars
+*.auto.tfvars.json
+*.tfvars
+*.tfvars.json
+!.example.tfvars
+
+# Lock files and downloaded modules/providers.
+.terraform/
+**/examples/**/.terraform.lock.hcl
+
+# Editor files
+*.swp
+.DS_Store
