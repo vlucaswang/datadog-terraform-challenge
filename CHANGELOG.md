@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2](https://github.com/vlucaswang/datadog-terraform-challenge/compare/v1.0.1...v1.0.2) (2026-03-21)
+
+### Bug Fixes
+
+* use absolute module path in terratest ([c8805b7](https://github.com/vlucaswang/datadog-terraform-challenge/commit/c8805b720b3194a2375c920370287564ec16108b))
+* use official datadog env vars ([9f4bb05](https://github.com/vlucaswang/datadog-terraform-challenge/commit/9f4bb05ac6d4550a64c1dfe99ad1ca16dc443fc7))
+
 ## [1.0.1](https://github.com/vlucaswang/datadog-terraform-challenge/compare/v1.0.0...v1.0.1) (2026-03-20)
 
 ### Bug Fixes
