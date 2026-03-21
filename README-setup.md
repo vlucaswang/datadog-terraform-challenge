@@ -23,7 +23,7 @@ export DD_APP_KEY="..."
 export DD_HOST="https://api.ap2.datadoghq.com"
 ```
 
-`DATADOG_API_URL` can be changed for non-US1 Datadog sites.
+Set `DD_HOST` to the Datadog API endpoint for your site.
 
 ## Usage
 
@@ -46,4 +46,4 @@ Read the [simple example](datadog_website_monitor/examples/simple/main.tf) for t
 
 Development uses pre-commit, `terraform fmt`, `terraform validate`, and `tflint` for consistency and baseline quality checks.
 Releases are automated with GitHub Actions and semantic-release using Conventional Commits.
-Integration testing uses Terratest and requires `DATADOG_API_KEY` and `DATADOG_APP_KEY`.
+Integration testing uses Terratest and requires `DD_API_KEY`, `DD_APP_KEY`, and `DD_HOST`.

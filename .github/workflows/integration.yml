@@ -26,8 +26,9 @@ jobs:
     name: Terratest
     runs-on: ubuntu-latest
     env:
-      DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-      DATADOG_APP_KEY: ${{ secrets.DATADOG_APP_KEY }}
+      DD_API_KEY: ${{ secrets.DD_API_KEY }}
+      DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
+      DD_HOST: ${{ secrets.DD_HOST }}
       TF_IN_AUTOMATION: "true"
     steps:
       - name: Checkout

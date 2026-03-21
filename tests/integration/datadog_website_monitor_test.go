@@ -16,8 +16,8 @@ import (
 func TestDatadogWebsiteMonitor(t *testing.T) {
 	t.Parallel()
 
-	if os.Getenv("DATADOG_API_KEY") == "" || os.Getenv("DATADOG_APP_KEY") == "" {
-		t.Skip("DATADOG_API_KEY and DATADOG_APP_KEY must be set to run the integration test")
+	if os.Getenv("DD_API_KEY") == "" || os.Getenv("DD_APP_KEY") == "" || os.Getenv("DD_HOST") == "" {
+		t.Skip("DD_API_KEY, DD_APP_KEY, and DD_HOST must be set to run the integration test")
 	}
 
 	fixtureDir := test_structure.CopyTerraformFolderToTemp(t, "..", "fixtures/basic")
