@@ -3,6 +3,7 @@ package integration
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -22,6 +23,10 @@ func TestDatadogWebsiteMonitor(t *testing.T) {
 
 	fixtureDir := test_structure.CopyTerraformFolderToTemp(t, "..", "fixtures/basic")
 	uniqueID := strings.ToLower(random.UniqueId())
+	moduleDir, err := filepath.Abs("../../datadog_website_monitor")
+	require.NoError(t, err)
+	tempModuleDir := filepath.Clean(filepath.Join(fixtureDir, "../../../datadog_website_monitor"))
+	require.NoError(t, copyDir(moduleDir, tempModuleDir))
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		TerraformDir: fixtureDir,
@@ -55,5 +60,31 @@ func TestDatadogWebsiteMonitor(t *testing.T) {
 	require.NotEmpty(t, availabilityMonitorID)
 	require.NotEmpty(t, latencyMonitorID)
 	require.NotEmpty(t, dashboardURL)
-	assert.Contains(t, dashboardURL, "http")
+	assert.Contains(t, dashboardURL, "/dashboard/")
+}
+
+func copyDir(src, dst string) error {
+	return filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+
+		relativePath, err := filepath.Rel(src, path)
+		if err != nil {
+			return err
+		}
+
+		targetPath := filepath.Join(dst, relativePath)
+
+		if info.IsDir() {
+			return os.MkdirAll(targetPath, info.Mode())
+		}
+
+		sourceFile, err := os.ReadFile(path)
+		if err != nil {
+			return err
+		}
+
+		return os.WriteFile(targetPath, sourceFile, info.Mode())
+	})
 }

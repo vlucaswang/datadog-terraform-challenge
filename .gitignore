@@ -17,6 +17,7 @@ crash.log
 # Lock files and downloaded modules/providers.
 .terraform/
 **/examples/**/.terraform.lock.hcl
+**/tests/**/.terraform.lock.hcl
 
 # Editor files
 *.swp
