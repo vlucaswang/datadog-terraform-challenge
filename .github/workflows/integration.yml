@@ -1,0 +1,55 @@
+name: Integration Tests
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'datadog_website_monitor/**'
+      - 'tests/**'
+      - 'go.mod'
+      - 'go.sum'
+      - '.github/workflows/integration.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'datadog_website_monitor/**'
+      - 'tests/**'
+      - 'go.mod'
+      - 'go.sum'
+      - '.github/workflows/integration.yml'
+
+jobs:
+  terratest:
+    name: Terratest
+    runs-on: ubuntu-latest
+    env:
+      DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+      DATADOG_APP_KEY: ${{ secrets.DATADOG_APP_KEY }}
+      TF_IN_AUTOMATION: "true"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Get Terraform version
+        id: terraform_version
+        run: |
+          echo "terraform_version=$(awk '/terraform/ {print $2}' .tool-versions)" >> "$GITHUB_OUTPUT"
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ steps.terraform_version.outputs.terraform_version }}
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Download Go modules
+        run: go mod download
+
+      - name: Run Terratest integration suite
+        run: go test ./tests/integration -v -count=1 -timeout 45m

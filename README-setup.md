@@ -6,8 +6,9 @@ Install dependencies and configure local tooling:
 
 ```bash
 brew bundle
+asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
 asdf plugin add terraform https://github.com/asdf-community/asdf-hashicorp.git
-asdf install terraform
+asdf install
 pre-commit install
 pre-commit install-hooks
 ```
@@ -45,3 +46,4 @@ Read the [simple example](datadog_website_monitor/examples/simple/main.tf) for t
 
 Development uses pre-commit, `terraform fmt`, `terraform validate`, and `tflint` for consistency and baseline quality checks.
 Releases are automated with GitHub Actions and semantic-release using Conventional Commits.
+Integration testing uses Terratest and requires `DATADOG_API_KEY` and `DATADOG_APP_KEY`.

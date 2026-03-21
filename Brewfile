@@ -1,4 +1,5 @@
 brew 'asdf'
+brew 'go'
 brew 'pre-commit'
 brew 'terraform-docs'
 brew 'tflint'
